@@ -23,7 +23,7 @@ checkRecentLocation();
 
 var autoFillSearch = function (event) {
   event.preventDefault();
-  console.log("autoFillSearch has been called");
+  // console.log("autoFillSearch has been called");
   var userSearchInputEl = document.getElementById("search-input");
   // // console.log(userSearchInputEl);
 
@@ -31,7 +31,7 @@ var autoFillSearch = function (event) {
   // console.log("this city searched :", userInput);
 
   var recentLocation = localStorage.getItem("recentLocation");
-  console.log(recentLocation);
+  // console.log(recentLocation);
   userSearchInputEl.value = recentLocation;
 };
 
@@ -60,9 +60,9 @@ var autoFillSearch = function (event) {
 
 var trackArray = [];
 
-likeHazeArr = ["hazey", "stoned", "dreamy", "space", "stellar"];
+likeHazeArr = ["hazey", "stoned", "dreamy", "space", "stellar", "vapor", "steam", "mist", "blur", "muddle", "smoke", "daze", "obscurity", "haxiness", "murk", "doubt", "gloom", "puffs", "veil", "overcast", "shadow", "dim"];
 
-likeMistArr = ["reverb", "damp", "relaxing", "smooth"];
+likeMistArr = ["reverb", "damp", "relaxing", "smooth", "dew", "steam", "rain", "drizzle", "gloom", "wet", "fog", ];
 
 likeCloudsArr = [
   "chill",
@@ -73,6 +73,9 @@ likeCloudsArr = [
   "fog",
   "daze",
   "sad",
+  "mystify",
+  "dim",
+  "faded"
 ];
 
 likeRainArr = [
@@ -85,9 +88,23 @@ likeRainArr = [
   "indoors",
   "flood",
   "lightning",
+  "warm",
+  "smooth",
+  "relaxing",
+  "cleanse",
+  "hopeful",
+  "rainfall",
+  "sprinke",
+  "downpour",
+  "raindrops",
+  "drip",
+  "drop",
+  "drizzle",
+  "splash",
+  "sob"
 ];
 
-likeClearArr = ["air", "fresh", "open"];
+likeClearArr = ["air", "fresh", "open", "light", "sunny", "crystal", "fine", "pleasent", "shiny", "easy", "see", "free", "liberate", "visible", "ok"];
 
 likeSunnyArr = [
   "bright",
@@ -99,6 +116,18 @@ likeSunnyArr = [
   "heat",
   "beach",
   "summer",
+  "brilliant",
+  "radient",
+  "hot",
+  "shine",
+  "feel good",
+  "hopeful",
+  "rosey",
+  "upbeat",
+  "happy",
+  "smiling",
+  "lighthearted",
+  "lively",
 ];
 
 likeSnowArr = ["cold", "winter", "peacfull", "ice", "blizzard", "snowy"];
@@ -108,13 +137,13 @@ likeDrizzleArr = ["beats", "chill", "cool", "vibe"];
 
 var searchHandler = function (event, ) {
   event.preventDefault();
-  console.log("handler has been called");
+  // console.log("handler has been called");
 
   var userSearchInputEl = document.getElementById("search-input");
   // console.log(userSearchInputEl);
 
   var userInput = userSearchInputEl.value.trim();
-  console.log("this city searched :", userInput);
+  // console.log("this city searched :", userInput);
 
   if (userInput) {
     getWeather(userInput);
@@ -122,7 +151,7 @@ var searchHandler = function (event, ) {
     userSearchInputEl.value = "";
   } else {
     // modalPrompt("please enter a city and state. Ex: 'Austin, TX'.", "invalid Format!");
-    alert("please enter a city and state. Ex: 'Austin, TX'.");
+    window.alert("please enter a city and state. Example: 'Austin, TX'.");
   }
   var searchedCityEl = document.getElementById("searched-city"); 
   searchedCityEl.innerHTML = "Location: " + userInput;
@@ -229,13 +258,13 @@ var getWeather = function (cityName, stateCode) {
       // request was successful
       if (response.ok) {
         response.json().then(function (data) {
-          console.log("this is the weather data: ", data);
+          // console.log("this is the weather data: ", data);
           var weatherSearchTerm = data.weather[0].main;
           weatherTemp = (((data.main.temp-273.15)*9)/5)+32;
           console.log("the current weatherSearchTerm that will be the 1st tag searched is : ", weatherSearchTerm);
           var searchedCityEl = document.getElementById("searched-city"); 
           searchedCityEl.innerHTML = searchedCityEl.innerHTML +  "<br/> Weather: " + weatherSearchTerm +  "<br/> Temperature: " + Math.round(weatherTemp);
-          console.log(data.weather[0].icon);
+          // console.log(data.weather[0].icon);
 
           var iconCode = data.weather[0].icon;
           var iconEl = document.createElement("img");
@@ -276,27 +305,27 @@ var pickTrack = function () {
   };
 
   var random = Math.floor(Math.random() * trackList.length);
-  console.log(random);
+  // console.log(random);
 
   // if (trackList[random].)
   
   var trackName = trackList[random].name;
-  console.log(trackName);
+  // console.log(trackName);
 
   var artist = trackList[random].artist.name;
-  console.log(artist);
+  // console.log(artist);
 
   var imageObj = trackList[random].image[0];
   // console.log(Obj);
-  console.log(Object.values(imageObj));
+  // console.log(Object.values(imageObj));
   var imagePng = Object.values(imageObj)  
-  console.log(imagePng);
+  // console.log(imagePng);
 
 
   currentMusic.track = trackName;
   currentMusic.artist = artist;
   currentMusic.image = imagePng[0];
-  console.log(currentMusic);
+  // console.log(currentMusic);
 
   getAlbum(currentMusic);
 
@@ -323,16 +352,16 @@ var getAlbum = function (currentMusic) {
       // request was successful
       if (response.ok) {
         response.json().then(function (data) {
-          console.log("this is getAlbum data:", data);
+          // console.log("this is getAlbum data:", data);
           //console.log(data.track.album.title);
           if (!data || !data.track || !data.track.album || !data.track.album.title) {
-            console.log("NO ALBUM DATA AVAILABLE ON THIS TRACK.");
+            // console.log("NO ALBUM DATA AVAILABLE ON THIS TRACK.");
             pickTrack();
           } else {
             var albumTitle = data.track.album.title;
-            console.log("THE ALBUM IS: ", albumTitle)
+            // console.log("THE ALBUM IS: ", albumTitle)
             currentMusic.album = albumTitle;
-            console.log(currentMusic);
+            // console.log(currentMusic);
 
             napsterSearch(currentMusic);
           };
@@ -347,7 +376,7 @@ var getAlbum = function (currentMusic) {
 };
 
 var napsterSearch = function (currentMusic) {
-  console.log(currentMusic);
+  // console.log(currentMusic);
   currentMusic.album = currentMusic.album.replace(/\s+/g, '-').toLowerCase();
   currentMusic.track = currentMusic.track.replace(/\s+/g, '-').toLowerCase();
   currentMusic.artist = currentMusic.artist.replace(/\s+/g, '-').toLowerCase();
@@ -362,22 +391,22 @@ var napsterSearch = function (currentMusic) {
     // request was successful
     if (response.ok) {
       response.json().then(function (data) {
-        console.log(data);
+        // console.log(data);
 
         if (data.tracks.length === 0) {
-          console.log("NO TRACKS SHOWED UP IN THE SEARCH");
+          // console.log("NO TRACKS SHOWED UP IN THE SEARCH");
           pickTrack();
         };
         var preview = data.tracks[0].previewURL;
-        console.log(preview);
+        // console.log(preview);
         if (!preview){
-          console.log("THERE IS NO MP3 FOR THIS TRACK");
+          // console.log("THERE IS NO MP3 FOR THIS TRACK");
           pickTrack();
         };
 
         // GETS ALBULM ID FOR ALBUM ARTWORK SEARCH 
         var albumID = data.tracks[0].albumId.substring(0,1).toUpperCase() + data.tracks[0].albumId.substring(1);
-        console.log(albumID);
+        // console.log(albumID);
 
         var getAlbumArt = function(albumID) {
 
@@ -388,10 +417,10 @@ var napsterSearch = function (currentMusic) {
                   .then(function (response) {
                     if (response.ok) {
                       response.json().then(function (data) {
-                        console.log(data);
+                        // console.log(data);
         
                         currentMusic.image = data.images[0].url;
-                        console.log(currentMusic);
+                        // console.log(currentMusic);
 
                         var imageEl = document.createElement("img");
                         imageEl.className = "albumArt";
@@ -420,9 +449,9 @@ var napsterSearch = function (currentMusic) {
 
         displayCard.appendChild(musicInfoList);
 
-        currentMusic.album = currentMusic.album.replace('-', " ").toLowerCase();
-        currentMusic.track = currentMusic.track.replace('-', " ").toLowerCase();
-        currentMusic.artist = currentMusic.artist.replace('-', " ").toLowerCase();
+        currentMusic.album = currentMusic.album.replaceAll('-', " ").toLowerCase();
+        currentMusic.track = currentMusic.track.replaceAll('-', " ").toLowerCase();
+        currentMusic.artist = currentMusic.artist.replaceAll('-', " ").toLowerCase();
         console.log(currentMusic);
         
         var trackNameEl = document.createElement("li");
