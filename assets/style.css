@@ -1,0 +1,240 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: ghostwhite;
+    text-align: center;
+    height: 125px;
+    width: auto;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+
+.blinker {
+    animation: blinker;
+    animation-duration: 0.1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+}
+
+#appNameCustom {
+    font-family: 'BPneon', sans-serif;
+    font-size: 100px;
+    color: aqua;
+    padding-top: 25px;
+    padding-bottom: 10px;
+    font-variant: discretionary-ligatures;
+    text-shadow: 5px 8px 5px slateblue;
+}
+
+.main-container {
+    min-height: 100%;
+    height: auto;
+    width: auto;
+    background-image: url(./img/background\ PINK-SMOKE.png);
+    display: grid;
+    justify-content: center;
+
+}
+
+.search-input {
+    width: 100%;
+    padding: 3%;
+    margin: 5px 0;
+    font-size: small;
+}
+
+
+.search-container {
+    display: flex;
+    margin: 40px;
+    background-color: black;
+    width: max-content;
+    opacity: 90%;
+    flex-direction: column;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn-holder {
+    flex-direction: row;
+    justify-content: center;
+    display: flex;
+}
+
+
+.search-container .btn-holder button {
+    padding: 7px 15px;
+    background-color: blueviolet;
+    opacity: 75%;
+    font-size: medium;
+    color: darkgrey;
+}
+
+.search-button {
+    display: flex;
+    height: 100px;
+    width: 200px;
+}
+
+.weather-container {
+    display: block;
+    margin: 30px;
+    background-color: black;
+    opacity: 90%;
+    border-radius: 5px;
+    max-height: 250px;
+    text-align: -webkit-center;
+}
+.weather-info {
+    text-align: center;
+    max-width: fit-content;
+}
+
+footer {
+    background-color: black;
+    color: blanchedalmond;
+    height: 50px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+#track-container {
+    background-color: black;
+    height: 50px;
+    width: 500px;
+    border-radius: 25px;
+    color: honeydew;
+    text-align: justify;
+    font-size: xx-large;
+}
+
+#track-label {
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+audio {
+    padding: 10px;
+    width:-webkit-fill-available;
+}
+
+ul {
+    display: inline-block;
+    max-width: 275px;
+    list-style: none;
+    text-align: center;
+    padding-left: 0;
+}
+
+.albumArt {
+ margin: inherit
+}
+
+.uk-card-body {
+    display: block;
+    height: fit-content;
+    width: auto;
+}
+
+#search-input {
+    height: 50px;
+    text-align: center;
+}
+
+
+
+/* MEDIA QUERIES */
+@media only screen and (max-width: 650px) {
+    #appNameCustom {
+        font-size: 60px;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    #appNameCustom {
+        font-size: 45px;
+    }
+    
+    .search-container {
+        margin:20px;
+    }
+
+    [class*=uk-align] {
+        margin-bottom: 0px;
+    }
+
+    .main-container {
+        display: grid;
+        justify-content: space-evenly;
+        align-items: end;
+    }
+
+    .uk-button-default {
+        margin-top: 20px;
+    }
+
+    .btn-holder {
+        display: grid;
+        justify-content: center;
+        height: 175px;
+    }
+
+    .uk-align-right {
+        margin-left: 0px;
+    }
+
+    .weather-info {
+        font-size: small;
+    }
+}
+
+@media only screen and (max-width: 385px) {
+    .uk-card-body {
+        width: 275px;
+    }
+
+    .search-container .btn-holder button {
+        height: fit-content;
+    }
+
+    #search-input {
+        height: 50px;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    ul {
+        font-size: small;
+    }
+
+    #appNameCustom {
+        font-size: 35px;
+    }
+
+    .header {
+        height: auto;
+    }
+};
