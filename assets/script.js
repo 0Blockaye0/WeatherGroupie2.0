@@ -286,21 +286,34 @@ var getWeather = function (cityName, stateCode) {
     });
 };
 
-// var trackList = [];
+var trackList = [];
 
 var pickTrack = function () {
-  console.log("picktrack was called")
-  var trackList = [];
+  console.log("pickTrack was called")
+  if (trackList.length <= 0) {
+    console.log("NO TRACKLIST")
+    // var trackList = [];
+    for (i = 0; i < trackArray.length; i++) {
+      trackArray[i].forEach(element => {
+        trackList.push(element);
+  
+        // console.log(trackList);
+      });
+    };
+  }
+  // var trackList = [];
+  
 
-  for (i = 0; i < trackArray.length; i++) {
-    trackArray[i].forEach(element => {
-      trackList.push(element);
-      // console.log(trackList);
-    });
-  };
+  // for (i = 0; i < trackArray.length; i++) {
+  //   trackArray[i].forEach(element => {
+  //     trackList.push(element);
+
+  //     // console.log(trackList);
+  //   });
+  // };
   
   // var trackList = trackArray[Math.floor(Math.random() * trackArray.length)];
-  console.log(trackList);
+  console.log("old tracklist---------", trackList);
 
   var currentMusic = {
     track: "",
@@ -311,16 +324,15 @@ var pickTrack = function () {
 
   var random = Math.floor(Math.random() * trackList.length);
   // console.log(random);
-
-  // if (trackList[random].)
+  var track = trackList[random]; 
   
-  var trackName = trackList[random].name;
+  var trackName = track.name;
   // console.log(trackName);
 
-  var artist = trackList[random].artist.name;
+  var artist = track.artist.name;
   // console.log(artist);
 
-  var imageObj = trackList[random].image[0];
+  var imageObj = track.image[0];
   // console.log(Obj);
   // console.log(Object.values(imageObj));
   var imagePng = Object.values(imageObj)  
@@ -334,7 +346,11 @@ var pickTrack = function () {
 
   getAlbum(currentMusic);
 
-  
+  if (trackList.length >= 0 ) {
+    console.log("trackArray length is greater than 0");
+    trackList.splice(random, 1);
+    console.log("NewTrackList:--------", trackList)
+  };
 
   // napsterSearch(artist, track);
 };
@@ -369,6 +385,7 @@ var getAlbum = function (currentMusic) {
             // console.log(currentMusic);
 
             napsterSearch(currentMusic);
+
           };
         });
       } else {
