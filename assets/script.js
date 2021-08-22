@@ -286,8 +286,10 @@ var getWeather = function (cityName, stateCode) {
     });
 };
 
-var pickTrack = function () {
+// var trackList = [];
 
+var pickTrack = function () {
+  console.log("picktrack was called")
   var trackList = [];
 
   for (i = 0; i < trackArray.length; i++) {
@@ -378,6 +380,12 @@ var getAlbum = function (currentMusic) {
     });
 };
 
+var nextBtnHandler = function (event) {
+  event.preventDefault();
+  console.log("nextBtnHandler has been called")
+  pickTrack();
+};
+
 var napsterSearch = function (currentMusic) {
   // console.log(currentMusic);
   currentMusic.album = currentMusic.album.replace(/\s+/g, '-').toLowerCase();
@@ -446,11 +454,12 @@ var napsterSearch = function (currentMusic) {
         // btnHolder.appendChild(skipBtn);
 
         var musicInfoList = document.createElement("ul");
-        var displayCard = document.getElementById("search-container");
+        var mainContainer = document.getElementById("main-container");
+        // var container = document.getElementById("track-container");
 
         getAlbumArt(albumID);
 
-        displayCard.appendChild(musicInfoList);
+        userSearchContainer.appendChild(musicInfoList);
 
         currentMusic.album = currentMusic.album.replaceAll('-', " ").toLowerCase();
         currentMusic.track = currentMusic.track.replaceAll('-', " ").toLowerCase();
@@ -479,12 +488,24 @@ var napsterSearch = function (currentMusic) {
         audioEl.setAttribute("src", preview);
         audioEl.setAttribute("controls", "contols");
         // console.log(audioEl);
-        displayCard.appendChild(audioEl);
+        userSearchContainer.appendChild(audioEl);
         // var albumEl = document.createElement("")
+
+        var nextBtnEl = document.createElement("button");
+        nextBtnEl.setAttribute("id", "next-btn");
+        nextBtnEl.innerHTML = ">>";
+        mainContainer.appendChild(nextBtnEl);
+        nextBtnEl.setAttribute("onclick", "pickTrack()")
+        
       });
-    };  
+    }
+    else {
+      alert("It seems there was an error, please try again!");
+    }
   });
 };
+
+
 
 // var clearElements = function (element) {
 //   element.innerHTML = "";
@@ -493,5 +514,8 @@ var napsterSearch = function (currentMusic) {
 userSearchContainer.addEventListener("submit", searchHandler);
 
 recentLocationFormEl.addEventListener("submit", autoFillSearch);
+
+// var nextBtn = getElementById("next-btn");
+// nextBtn.addEventListener("submit", nextBtnHandler);
 
 //getWeather("Austin, TX");

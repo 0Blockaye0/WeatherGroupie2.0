@@ -163,6 +163,14 @@ ul {
     text-align: center;
 }
 
+#next-btn {
+    width: 30px;
+    height: 15px;
+    text-align: center;
+    display: inline;
+    margin: 25px;
+}
+
 
 
 /* MEDIA QUERIES */
