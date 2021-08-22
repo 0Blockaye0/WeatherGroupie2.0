@@ -58,6 +58,9 @@ var autoFillSearch = function (event) {
 //   modalEl.toggleAttribute()
 // };
 
+
+
+// synonym tags to be searched depending on local weather
 var trackArray = [];
 
 likeHazeArr = ["hazey", "stoned", "dreamy", "space", "stellar", "vapor", "steam", "mist", "blur", "muddle", "smoke", "daze", "obscurity", "haxiness", "murk", "doubt", "gloom", "puffs", "veil", "overcast", "shadow", "dim"];
@@ -151,7 +154,7 @@ var searchHandler = function (event, ) {
     userSearchInputEl.value = "";
   } else {
     // modalPrompt("please enter a city and state. Ex: 'Austin, TX'.", "invalid Format!");
-    window.alert("please enter a city and state. Example: 'Austin, TX'.");
+    window.alert("Please enter a city, followed by a comma, and then the state code. Example: 'Austin, TX'");
   }
   var searchedCityEl = document.getElementById("searched-city"); 
   searchedCityEl.innerHTML = "Location: " + userInput;
@@ -275,7 +278,7 @@ var getWeather = function (cityName, stateCode) {
           return weatherSearchTerm;
         });
       } else {
-        alert("Error: " + response.statusText);
+        alert("Please enter a city, followed by a comma, and then the state code. Example: 'Austin, TX'");
       }
     })
     .catch(function (error) {
