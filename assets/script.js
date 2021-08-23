@@ -514,9 +514,9 @@ var napsterSearch = function (currentMusic) {
                 response.json().then(function (data) {
                   console.log("this is the album artwork data-------", data);
                   if (
-                    data.images[0].url == null ||
+                    !data.images[0].url ||
                     data.images[0].url == "" ||
-                    !data.images[0].url
+                    data.images[0].url == null
                   ) {
                     // console.log("conditional statement true");
                     currentMusic.image = "assets/img/stock_album_image.jpg";

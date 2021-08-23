@@ -164,11 +164,12 @@ ul {
 }
 
 #next-btn {
-    width: 48px;
-    height: 48px;
+    width: 42px;
+    height: 40px;
     text-align: center;
     display: inline;
-    margin: 25px;
+    margin-right: -24px;
+    margin-left: 1rem;
     float: right;
     margin-top: 5rem;
     background-color: darkslateblue;
@@ -177,8 +178,8 @@ ul {
 }
 
 #next-btn-icon {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
 }
 
 
