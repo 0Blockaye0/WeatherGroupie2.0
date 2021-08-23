@@ -626,7 +626,7 @@ var napsterSearch = function (currentMusic) {
           nextBtnEl.setAttribute("id", "next-btn");
           // nextBtnEl.innerHTML = ">>";
           var nextBtnIcon = document.createElement("img");
-          nextBtnIcon.setAttribute("src", "assets/img/next-track-button.png");
+          nextBtnIcon.setAttribute("src", "assets/img/icons8-next-page-48.png");
           nextBtnIcon.setAttribute("alt", "next track button");
           nextBtnIcon.setAttribute("id", "next-btn-icon");
           nextBtnEl.appendChild(nextBtnIcon);
