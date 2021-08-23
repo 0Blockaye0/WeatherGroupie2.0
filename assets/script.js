@@ -621,9 +621,15 @@ var napsterSearch = function (currentMusic) {
           return;
         } else {
           // console.log("creating next button");
+          // <ion-icon name="play-forward-circle-outline"></ion-icon>
           var nextBtnEl = document.createElement("button");
           nextBtnEl.setAttribute("id", "next-btn");
-          nextBtnEl.innerHTML = ">>";
+          // nextBtnEl.innerHTML = ">>";
+          var nextBtnIcon = document.createElement("img");
+          nextBtnIcon.setAttribute("src", "assets/img/next-track-button.png");
+          nextBtnIcon.setAttribute("alt", "next track button");
+          nextBtnIcon.setAttribute("id", "next-btn-icon");
+          nextBtnEl.appendChild(nextBtnIcon);
           // mainContainer.appendChild(nextBtnEl);
           musicInfoList.appendChild(nextBtnEl);
           nextBtnEl.setAttribute("onclick", "pickTrack()");
