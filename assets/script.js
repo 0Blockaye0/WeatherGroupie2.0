@@ -445,9 +445,21 @@ var napsterSearch = function (currentMusic) {
                   .then(function (response) {
                     if (response.ok) {
                       response.json().then(function (data) {
-                        // console.log(data);
-        
-                        currentMusic.image = data.images[0].url;
+                        console.log("this is the album artwork data-------", data);
+                        if (data.images[0].url == null || data.images[0].url == "" || !data.images[0].url) {
+                          // console.log("conditional statement true");
+                          currentMusic.image = "assets/img/stock_album_image.jpg"
+                          // console.log(currentMusic);
+
+                        var imageEl = document.createElement("img");
+                        imageEl.className = "albumArt";
+                        imageEl.setAttribute("src", currentMusic.image);
+                        imageEl.setAttribute("alt", "no image available");
+                        musicInfoList.appendChild(imageEl);
+                        }
+                        else {
+                          console.log("false")
+                          currentMusic.image = data.images[0].url;
                         // console.log(currentMusic);
 
                         var imageEl = document.createElement("img");
@@ -455,8 +467,16 @@ var napsterSearch = function (currentMusic) {
                         imageEl.setAttribute("src", currentMusic.image);
                         imageEl.setAttribute("alt", "no image available");
                         musicInfoList.appendChild(imageEl);
+                        }
+                        
                       });
-                    };
+                    }
+                     else {
+                      alert("Error: " + response.statusText);
+                    }
+                  })
+                  .catch(function (error) {
+                    alert("there was an error:", error);
                   });
         };
 
