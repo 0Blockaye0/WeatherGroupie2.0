@@ -1,6 +1,5 @@
-
 var userSearchContainer = document.getElementById("search-container");
-var searchBtn = document.getElementById("search-button")
+var searchBtn = document.getElementById("search-button");
 
 var recentLocationFormEl = document.createElement("form");
 userSearchContainer.appendChild(recentLocationFormEl);
@@ -16,8 +15,8 @@ function checkRecentLocation() {
   if (recentLocation) {
     recentLocationBtn.innerHTML = recentLocation;
     recentLocationFormEl.appendChild(recentLocationBtn);
-  };
-};
+  }
+}
 
 checkRecentLocation();
 
@@ -38,10 +37,10 @@ var autoFillSearch = function (event) {
 // var modalPrompt = function (dialog, title) {
 //   var modalEl = document.createElement("div");
 //   modalEl.setAttribute("class", "uk-modal uk-alert uk-alert-warning");
-  
+
 //   var modalDialogEl = document.createElement("div");
 //   modalDialogEl.setAttribute("class", "uk-modal-dialog uk-modal-body");
-  
+
 //   var modalTitle = document.createElement("h2");
 //   modalTitle.setAttribute("class", "uk-modal-title");
 //   modalTitle.textContent = title;
@@ -58,14 +57,47 @@ var autoFillSearch = function (event) {
 //   modalEl.toggleAttribute()
 // };
 
-
-
 // synonym tags to be searched depending on local weather
 var trackArray = [];
 
-likeHazeArr = ["hazey", "stoned", "dreamy", "space", "stellar", "vapor", "steam", "mist", "blur", "muddle", "smoke", "daze", "obscurity", "haxiness", "murk", "doubt", "gloom", "puffs", "veil", "overcast", "shadow", "dim"];
+likeHazeArr = [
+  "hazey",
+  "stoned",
+  "dreamy",
+  "space",
+  "stellar",
+  "vapor",
+  "steam",
+  "mist",
+  "blur",
+  "muddle",
+  "smoke",
+  "daze",
+  "obscurity",
+  "haxiness",
+  "murk",
+  "doubt",
+  "gloom",
+  "puffs",
+  "veil",
+  "overcast",
+  "shadow",
+  "dim",
+];
 
-likeMistArr = ["reverb", "damp", "relaxing", "smooth", "dew", "steam", "rain", "drizzle", "gloom", "wet", "fog", ];
+likeMistArr = [
+  "reverb",
+  "damp",
+  "relaxing",
+  "smooth",
+  "dew",
+  "steam",
+  "rain",
+  "drizzle",
+  "gloom",
+  "wet",
+  "fog",
+];
 
 likeCloudsArr = [
   "chill",
@@ -78,7 +110,7 @@ likeCloudsArr = [
   "sad",
   "mystify",
   "dim",
-  "faded"
+  "faded",
 ];
 
 likeRainArr = [
@@ -104,10 +136,26 @@ likeRainArr = [
   "drop",
   "drizzle",
   "splash",
-  "sob"
+  "sob",
 ];
 
-likeClearArr = ["air", "fresh", "open", "light", "sunny", "crystal", "fine", "pleasent", "shiny", "easy", "see", "free", "liberate", "visible", "ok"];
+likeClearArr = [
+  "air",
+  "fresh",
+  "open",
+  "light",
+  "sunny",
+  "crystal",
+  "fine",
+  "pleasent",
+  "shiny",
+  "easy",
+  "see",
+  "free",
+  "liberate",
+  "visible",
+  "ok",
+];
 
 likeSunnyArr = [
   "bright",
@@ -137,8 +185,7 @@ likeSnowArr = ["cold", "winter", "peacfull", "ice", "blizzard", "snowy"];
 
 likeDrizzleArr = ["beats", "chill", "cool", "vibe"];
 
-
-var searchHandler = function (event, ) {
+var searchHandler = function (event) {
   event.preventDefault();
   // console.log("handler has been called");
 
@@ -154,9 +201,11 @@ var searchHandler = function (event, ) {
     userSearchInputEl.value = "";
   } else {
     // modalPrompt("please enter a city and state. Ex: 'Austin, TX'.", "invalid Format!");
-    window.alert("Please enter a city, followed by a comma, and then the state code. Example: 'Austin, TX'");
+    window.alert(
+      "Please enter a city, followed by a comma, and then the state code. Example: 'Austin, TX'"
+    );
   }
-  var searchedCityEl = document.getElementById("searched-city"); 
+  var searchedCityEl = document.getElementById("searched-city");
   searchedCityEl.innerHTML = "Location: " + userInput;
 };
 
@@ -168,7 +217,7 @@ var getSimilarTags = function (tag) {
   } else if (tag === "Clear") {
     newTag = likeClearArr[Math.floor(Math.random() * likeClearArr.length)];
     console.log("the 2nd tag is :", newTag);
-    getMoreTracks(newTag); 
+    getMoreTracks(newTag);
   } else if (tag === "Rain") {
     newTag = likeRainArr[Math.floor(Math.random() * likeRainArr.length)];
     console.log("the 2nd tag is :", newTag);
@@ -185,11 +234,11 @@ var getSimilarTags = function (tag) {
     newTag = likeMistArr[Math.floor(Math.random() * likeMistArr.length)];
     console.log("the 2nd tag is :", newTag);
     getMoreTracks(newTag);
-  } else if (tag === "Haze"){
+  } else if (tag === "Haze") {
     newTag = likeHazeArr[Math.floor(Math.random() * likeHazeArr.length)];
     console.log("the 2nd tag is :", newTag);
     getMoreTracks(newTag);
-  };
+  }
 };
 
 var getMoreTracks = function (newTag) {
@@ -209,7 +258,10 @@ var getMoreTracks = function (newTag) {
         response.json().then(function (data) {
           // console.log(data);
           trackArray.push(data.tracks.track);
-          console.log("the tracks that were returned from the tags searched are: ", trackArray);
+          console.log(
+            "the tracks that were returned from the tags searched are: ",
+            trackArray
+          );
           pickTrack();
         });
       } else {
@@ -263,22 +315,35 @@ var getWeather = function (cityName, stateCode) {
         response.json().then(function (data) {
           // console.log("this is the weather data: ", data);
           var weatherSearchTerm = data.weather[0].main;
-          weatherTemp = (((data.main.temp-273.15)*9)/5)+32;
-          console.log("the current weatherSearchTerm that will be the 1st tag searched is : ", weatherSearchTerm);
-          var searchedCityEl = document.getElementById("searched-city"); 
-          searchedCityEl.innerHTML = searchedCityEl.innerHTML +  "<br/> Weather: " + weatherSearchTerm +  "<br/> Temperature: " + Math.round(weatherTemp);
+          weatherTemp = ((data.main.temp - 273.15) * 9) / 5 + 32;
+          console.log(
+            "the current weatherSearchTerm that will be the 1st tag searched is : ",
+            weatherSearchTerm
+          );
+          var searchedCityEl = document.getElementById("searched-city");
+          searchedCityEl.innerHTML =
+            searchedCityEl.innerHTML +
+            "<br/> Weather: " +
+            weatherSearchTerm +
+            "<br/> Temperature: " +
+            Math.round(weatherTemp);
           // console.log(data.weather[0].icon);
 
           var iconCode = data.weather[0].icon;
           var iconEl = document.createElement("img");
-          iconEl.setAttribute("src", `http://openweathermap.org/img/wn/${iconCode}@2x.png`);
+          iconEl.setAttribute(
+            "src",
+            `http://openweathermap.org/img/wn/${iconCode}@2x.png`
+          );
           searchedCityEl.appendChild(iconEl);
 
           getTracks(weatherSearchTerm);
           return weatherSearchTerm;
         });
       } else {
-        alert("Please enter a city, followed by a comma, and then the state code. Example: 'Austin, TX'");
+        alert(
+          "Please enter a city, followed by a comma, and then the state code. Example: 'Austin, TX'"
+        );
       }
     })
     .catch(function (error) {
@@ -289,20 +354,19 @@ var getWeather = function (cityName, stateCode) {
 var trackList = [];
 
 var pickTrack = function () {
-  console.log("pickTrack was called")
+  console.log("pickTrack was called");
   if (trackList.length <= 0) {
-    console.log("NO TRACKLIST")
+    console.log("NO TRACKLIST");
     // var trackList = [];
     for (i = 0; i < trackArray.length; i++) {
-      trackArray[i].forEach(element => {
+      trackArray[i].forEach((element) => {
         trackList.push(element);
-  
+
         // console.log(trackList);
       });
-    };
+    }
   }
   // var trackList = [];
-  
 
   // for (i = 0; i < trackArray.length; i++) {
   //   trackArray[i].forEach(element => {
@@ -311,7 +375,7 @@ var pickTrack = function () {
   //     // console.log(trackList);
   //   });
   // };
-  
+
   // var trackList = trackArray[Math.floor(Math.random() * trackArray.length)];
   console.log("old tracklist---------", trackList);
 
@@ -319,13 +383,13 @@ var pickTrack = function () {
     track: "",
     artist: "",
     album: "",
-    image: ""
+    image: "",
   };
 
   var random = Math.floor(Math.random() * trackList.length);
   // console.log(random);
-  var track = trackList[random]; 
-  
+  var track = trackList[random];
+
   var trackName = track.name;
   // console.log(trackName);
 
@@ -335,9 +399,8 @@ var pickTrack = function () {
   var imageObj = track.image[0];
   // console.log(Obj);
   // console.log(Object.values(imageObj));
-  var imagePng = Object.values(imageObj)  
+  var imagePng = Object.values(imageObj);
   // console.log(imagePng);
-
 
   currentMusic.track = trackName;
   currentMusic.artist = artist;
@@ -346,11 +409,11 @@ var pickTrack = function () {
 
   getAlbum(currentMusic);
 
-  if (trackList.length >= 0 ) {
+  if (trackList.length >= 0) {
     console.log("trackArray length is greater than 0");
     trackList.splice(random, 1);
-    console.log("NewTrackList:--------", trackList)
-  };
+    console.log("NewTrackList:--------", trackList);
+  }
 
   // napsterSearch(artist, track);
 };
@@ -361,7 +424,7 @@ var getAlbum = function (currentMusic) {
 
   // console.log(`${currentMusic.artist}`);
 
-  var apiUrl = `https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${apiKey}&artist=${currentMusic.artist}&track=${currentMusic.track}&format=json`
+  var apiUrl = `https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${apiKey}&artist=${currentMusic.artist}&track=${currentMusic.track}&format=json`;
   // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.getSimilar&tag=${artist}&api_key=${apiKey}&format=json`
   // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=${newTag}&api_key=${apiKey}&format=json`;
   // var apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&tag=${artist}&api_key=${apiKey}&format=json`
@@ -375,7 +438,12 @@ var getAlbum = function (currentMusic) {
         response.json().then(function (data) {
           // console.log("this is getAlbum data:", data);
           //console.log(data.track.album.title);
-          if (!data || !data.track || !data.track.album || !data.track.album.title) {
+          if (
+            !data ||
+            !data.track ||
+            !data.track.album ||
+            !data.track.album.title
+          ) {
             // console.log("NO ALBUM DATA AVAILABLE ON THIS TRACK.");
             pickTrack();
           } else {
@@ -385,8 +453,7 @@ var getAlbum = function (currentMusic) {
             // console.log(currentMusic);
 
             napsterSearch(currentMusic);
-
-          };
+          }
         });
       } else {
         alert("Error: " + response.statusText);
@@ -399,23 +466,22 @@ var getAlbum = function (currentMusic) {
 
 var nextBtnHandler = function (event) {
   event.preventDefault();
-  console.log("nextBtnHandler has been called")
+  console.log("nextBtnHandler has been called");
   pickTrack();
 };
 
 var napsterSearch = function (currentMusic) {
   // console.log(currentMusic);
-  currentMusic.album = currentMusic.album.replace(/\s+/g, '-').toLowerCase();
-  currentMusic.track = currentMusic.track.replace(/\s+/g, '-').toLowerCase();
-  currentMusic.artist = currentMusic.artist.replace(/\s+/g, '-').toLowerCase();
+  currentMusic.album = currentMusic.album.replace(/\s+/g, "-").toLowerCase();
+  currentMusic.track = currentMusic.track.replace(/\s+/g, "-").toLowerCase();
+  currentMusic.artist = currentMusic.artist.replace(/\s+/g, "-").toLowerCase();
   console.log(currentMusic);
-  
+
   var apiKey = "ODU0NGU2ZTQtZjExMC00YWM1LWExNWUtMGEyZmVmNWUyMzQ4";
   var apiUrl = `https://api.napster.com/v2.2/tracks/${currentMusic.artist}/${currentMusic.album}/${currentMusic.track}?apikey=${apiKey}`;
   // var apiUrlImage = ``
 
-  fetch(apiUrl)
-  .then(function (response) {
+  fetch(apiUrl).then(function (response) {
     // request was successful
     if (response.ok) {
       response.json().then(function (data) {
@@ -424,60 +490,74 @@ var napsterSearch = function (currentMusic) {
         if (data.tracks.length === 0) {
           // console.log("NO TRACKS SHOWED UP IN THE SEARCH");
           pickTrack();
-        };
+        }
         var preview = data.tracks[0].previewURL;
         // console.log(preview);
-        if (!preview){
+        if (!preview) {
           // console.log("THERE IS NO MP3 FOR THIS TRACK");
           pickTrack();
-        };
+        }
 
-        // GETS ALBULM ID FOR ALBUM ARTWORK SEARCH 
-        var albumID = data.tracks[0].albumId.substring(0,1).toUpperCase() + data.tracks[0].albumId.substring(1);
-        // console.log(albumID);
+        // GETS ALBULM ID FOR ALBUM ARTWORK SEARCH
+        var albumID =
+          data.tracks[0].albumId.substring(0, 1).toUpperCase() +
+          data.tracks[0].albumId.substring(1);
+        console.log(albumID);
 
-        var getAlbumArt = function(albumID) {
-
+        var getAlbumArt = function (albumID) {
           apiKey = "ODU0NGU2ZTQtZjExMC00YWM1LWExNWUtMGEyZmVmNWUyMzQ4";
           apiUrl = `https://api.napster.com/v2.2/albums/${albumID}/images?apikey=${apiKey}`;
-        
+
           fetch(apiUrl)
-                  .then(function (response) {
-                    if (response.ok) {
-                      response.json().then(function (data) {
-                        console.log("this is the album artwork data-------", data);
-                        if (data.images[0].url == null || data.images[0].url == "" || !data.images[0].url) {
-                          // console.log("conditional statement true");
-                          currentMusic.image = "assets/img/stock_album_image.jpg"
-                          // console.log(currentMusic);
+            .then(function (response) {
+              if (response.ok) {
+                response.json().then(function (data) {
+                  console.log("this is the album artwork data-------", data);
+                  if (
+                    data.images[0].url == null ||
+                    data.images[0].url == "" ||
+                    !data.images[0].url
+                  ) {
+                    // console.log("conditional statement true");
+                    currentMusic.image = "assets/img/stock_album_image.jpg";
+                    // console.log(currentMusic);
 
-                        var imageEl = document.createElement("img");
-                        imageEl.className = "albumArt";
-                        imageEl.setAttribute("src", currentMusic.image);
-                        imageEl.setAttribute("alt", "no image available");
-                        musicInfoList.appendChild(imageEl);
-                        }
-                        else {
-                          console.log("false")
-                          currentMusic.image = data.images[0].url;
-                        // console.log(currentMusic);
+                    var imageEl = document.createElement("img");
+                    imageEl.className = "albumArt";
+                    imageEl.setAttribute("src", currentMusic.image);
+                    imageEl.setAttribute("alt", "no image available");
+                    musicInfoList.appendChild(imageEl);
+                  } else {
+                    console.log("false");
+                    currentMusic.image = data.images[0].url;
+                    // currentMusic.image = "assets/img/stock_album_image.jpg";
+                    // console.log(currentMusic);
 
-                        var imageEl = document.createElement("img");
-                        imageEl.className = "albumArt";
-                        imageEl.setAttribute("src", currentMusic.image);
-                        imageEl.setAttribute("alt", "no image available");
-                        musicInfoList.appendChild(imageEl);
-                        }
-                        
-                      });
-                    }
-                     else {
-                      alert("Error: " + response.statusText);
-                    }
-                  })
-                  .catch(function (error) {
-                    alert("there was an error:", error);
-                  });
+                    var imageEl = document.createElement("img");
+                    imageEl.className = "albumArt";
+                    imageEl.setAttribute("src", currentMusic.image);
+                    imageEl.setAttribute("alt", "no image available");
+                    musicInfoList.appendChild(imageEl);
+                  }
+                });
+              } else {
+                currentMusic.image = "assets/img/stock_album_image.jpg";
+                // console.log(currentMusic);
+
+                var imageEl = document.createElement("img");
+                imageEl.className = "albumArt";
+                imageEl.setAttribute("src", currentMusic.image);
+                imageEl.setAttribute("alt", "no image available");
+                musicInfoList.appendChild(imageEl);
+                console.log(
+                  "there was an Error, using stock photo for albulm artwork: " +
+                    response.statusText
+                );
+              }
+            })
+            .catch(function (error) {
+              alert("there was an error:", error);
+            });
         };
 
         // var btnHolder = document.getElementsByClassName("btn-holder");
@@ -491,18 +571,26 @@ var napsterSearch = function (currentMusic) {
         // btnHolder.appendChild(skipBtn);
 
         var musicInfoList = document.createElement("ul");
-        var mainContainer = document.getElementById("main-container");
+        musicInfoList.setAttribute("class", "music-info-list")
+        var mainCard = document.getElementById("main-card");
         // var container = document.getElementById("track-container");
 
         getAlbumArt(albumID);
 
-        userSearchContainer.appendChild(musicInfoList);
+        mainCard.appendChild(musicInfoList);
+        // userSearchContainer.appendChild(musicInfoList);
 
-        currentMusic.album = currentMusic.album.replaceAll('-', " ").toLowerCase();
-        currentMusic.track = currentMusic.track.replaceAll('-', " ").toLowerCase();
-        currentMusic.artist = currentMusic.artist.replaceAll('-', " ").toLowerCase();
+        currentMusic.album = currentMusic.album
+          .replaceAll("-", " ")
+          .toLowerCase();
+        currentMusic.track = currentMusic.track
+          .replaceAll("-", " ")
+          .toLowerCase();
+        currentMusic.artist = currentMusic.artist
+          .replaceAll("-", " ")
+          .toLowerCase();
         console.log(currentMusic);
-        
+
         var trackNameEl = document.createElement("li");
         trackNameEl.setAttribute("class", "uk-card-title card-title");
         trackNameEl.setAttribute("id", "track-title");
@@ -524,29 +612,28 @@ var napsterSearch = function (currentMusic) {
         // console.log(audioEl);
         audioEl.setAttribute("src", preview);
         audioEl.setAttribute("controls", "contols");
+        audioEl.setAttribute("class", "audio-element");
         // console.log(audioEl);
-        userSearchContainer.appendChild(audioEl);
-        // var albumEl = document.createElement("")
+        mainCard.appendChild(audioEl);
 
-        var nextBtnEl = document.createElement("button");
-        nextBtnEl.setAttribute("id", "next-btn");
-        nextBtnEl.innerHTML = ">>";
-        mainContainer.appendChild(nextBtnEl);
-        nextBtnEl.setAttribute("onclick", "pickTrack()")
-        
+        if (document.getElementById("next-btn")) {
+          // console.log("next button exist");
+          return;
+        } else {
+          // console.log("creating next button");
+          var nextBtnEl = document.createElement("button");
+          nextBtnEl.setAttribute("id", "next-btn");
+          nextBtnEl.innerHTML = ">>";
+          // mainContainer.appendChild(nextBtnEl);
+          musicInfoList.appendChild(nextBtnEl);
+          nextBtnEl.setAttribute("onclick", "pickTrack()");
+        }
       });
-    }
-    else {
+    } else {
       alert("It seems there was an error, please try again!");
     }
   });
 };
-
-
-
-// var clearElements = function (element) {
-//   element.innerHTML = "";
-// };
 
 userSearchContainer.addEventListener("submit", searchHandler);
 
