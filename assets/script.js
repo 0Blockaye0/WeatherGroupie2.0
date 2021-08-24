@@ -614,10 +614,14 @@ var napsterSearch = function (currentMusic) {
         audioEl.setAttribute("controls", "contols");
         audioEl.setAttribute("class", "audio-element");
         // console.log(audioEl);
-        mainCard.appendChild(audioEl);
+        musicInfoList.appendChild(audioEl);
+        // mainCard.appendChild(audioEl);
 
         if (document.getElementById("next-btn")) {
-          // console.log("next button exist");
+          var nextBtn = document.getElementById("next-btn");
+          nextBtn.remove();
+          mainCard.appendChild(nextBtn);
+
           return;
         } else {
           // console.log("creating next button");
@@ -630,8 +634,9 @@ var napsterSearch = function (currentMusic) {
           nextBtnIcon.setAttribute("alt", "next track button");
           nextBtnIcon.setAttribute("id", "next-btn-icon");
           nextBtnEl.appendChild(nextBtnIcon);
+          mainCard.appendChild(nextBtnEl);
           // mainContainer.appendChild(nextBtnEl);
-          musicInfoList.appendChild(nextBtnEl);
+          // musicInfoList.appendChild(nextBtnEl);
           nextBtnEl.setAttribute("onclick", "pickTrack()");
         }
       });

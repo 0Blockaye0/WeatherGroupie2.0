@@ -164,23 +164,10 @@ ul {
 }
 
 #next-btn {
-    width: 42px;
-    height: 40px;
-    text-align: center;
-    display: inline;
-    margin-right: -24px;
-    margin-left: 1rem;
-    float: right;
-    margin-top: 5rem;
-    background-color: darkslateblue;
-    border-radius: 25px;
-    border-style: none;
+    display: contents;
 }
 
-#next-btn-icon {
-    width: 40px;
-    height: 40px;
-}
+
 
 
 
