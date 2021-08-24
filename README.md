@@ -69,7 +69,7 @@
   3. More error handling.
   4. Improve audio controls styling.
   5. Add ability to save tracks to a playlist.
-  6. Find ways to use a larger data-set to avoid repeated tracks.
+  6. Find ways to use a larger data-set to avoid repeated tracks (possibly user login to spotify using jsonwebtoken).
 
 
   ## Contributing
